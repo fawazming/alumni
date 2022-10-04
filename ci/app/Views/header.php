@@ -5,26 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>PHF Ogun Quiz :: RayyanTech Dashboard</title>
+    <title>Alumni :: RayyanTech Dashboard</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/media/image/favicon.png" />
+    <link rel="shortcut icon" href="<?=base_url('assets/media/image/favicon.png')?>" />
 
     <!-- Main css -->
-    <link rel="stylesheet" href="vendors/bundle.css" type="text/css" />
+    <link rel="stylesheet" href="<?=base_url('vendors/bundle.css')?>" type="text/css" />
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet" />
 
     <!-- Daterangepicker -->
-    <link rel="stylesheet" href="vendors/form-wizard/jquery.steps.css" type="text/css" />
+    <link rel="stylesheet" href="<?=base_url('vendors/form-wizard/jquery.steps.css')?>" type="text/css" />
 
     <!-- DataTable -->
-    <link rel="stylesheet" href="vendors/dataTable/datatables.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?=base_url('vendors/dataTable/datatables.min.css')?>" type="text/css" />
 
     <!-- App css -->
-    <link rel="stylesheet" href="assets/css/app.min.css" type="text/css" />
+    <link rel="stylesheet" href="<?=base_url('assets/css/app.min.css')?>" type="text/css" />
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -112,7 +112,7 @@
 
                     <div class="header-logo">
                         <a href="index">
-                            <img class="logo" src="assets/media/image/logo.png" alt="logo" width="20%" />
+                            <img class="logo" src="<?=base_url('assets/media/image/logo.png')?>" alt="logo" width="20%" />
                         </a>
                     </div>
                 </div>
@@ -172,17 +172,17 @@
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" title="User menu" data-toggle="dropdown">
+                                <a href="<?=base_url('logout')?>" class="text-light" title="User menu" data-toggle="dropdown">
                                     <figure class="avatar avatar-sm">
-                                        <img src="assets/media/image/user/man_avatar3.jpg" class="rounded-circle"
+                                        <img src="<?=base_url('assets/media/image/user/man_avatar3.jpg')?>" class="rounded-circle"
                                             alt="avatar" />
                                     </figure>
-                                    <span class="ml-2 d-sm-inline d-none">Bony Gidden</span>
+                                    <span class="ml-2 d-sm-inline d-none">Logout</span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                                <!-- div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                                     <div class="text-center py-4">
                                         <figure class="avatar avatar-lg mb-3 border-0">
-                                            <img src="assets/media/image/user/man_avatar3.jpg" class="rounded-circle"
+                                            <img src="<?=base_url('assets/media/image/user/man_avatar3.jpg')?>" class="rounded-circle"
                                                 alt="image" />
                                         </figure>
                                         <h5 class="text-center">Bony Gidden</h5>
@@ -213,7 +213,7 @@
                                             <a href="#">Privacy policy</a>
                                         </p>
                                     </div>
-                                </div>
+                                </div> -->
                             </li>
                         </ul>
                     </div>

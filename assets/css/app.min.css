@@ -68,7 +68,9 @@ Author URL:   https://themeforest.net/user/laborasyon/portfolio
 --------------------
 --------------------------------------------------------------------- */
 :root{
-  --pcol: rgb(85, 105, 219);
+  --pcol: #07923F;
+  /*rgb(85, 105, 219);*/
+
 }
 
 .opacity-0 {

@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Controllers;
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Api\Upload\UploadApi;
+
 
 class Home extends BaseController
 {
@@ -20,8 +23,20 @@ class Home extends BaseController
 
     public function login()
     {
-        $db = db_connect();
-        var_dump($db);
+
+        // var_dump(ROOTPATH);
+        // Configuration::instance($_ENV['CLOUDINARY_URL']);
+        // // Upload the image
+        // $upload = new UploadApi();
+        // echo '<pre>';
+        // echo json_encode(
+        //     $upload->upload('https://res.cloudinary.com/demo/image/upload/flower.jpg', [
+        //         'public_id' => 'flower_sample',
+        //         'use_filename' => TRUE,
+        //         'overwrite' => TRUE]),
+        //     JSON_PRETTY_PRINT
+        // );
+        // echo '</pre>';
         echo view('login');
     }
 
@@ -102,26 +117,16 @@ class Home extends BaseController
         echo view('msg', $data);
     }
 
-    public function dashboard($quizid = 0)
+    public function dashboard()
     {
-        $var = new \App\Models\Variables();
-        $Quiz = new \App\Models\Quiz();
-        $scoresheet = new \App\Models\Scoresheet();
-        $user = new \App\Models\Users();
         $session = session();
-        $qlast = $quizid ? $quizid : $Quiz->orderBy('id', 'desc')->first()['id'];
         if ($session->logged_in == TRUE) {
             $data = [
-                'quizinput' => $var->where('key', 'quizinput')->find()[0]['value'],
-                'quiz' => $Quiz->findAll(),
-                'quizparticipants' => count($scoresheet->where('sent', '0')->find()),
-                'score' => $scoresheet->join('users', 'users.id = scoresheet.user')->where('quiz', $qlast)->findAll(),
-                'users' => $user->where('clearance', '1')->findAll(),
+                'alumni' => [],
             ];
-
             echo view('header');
             echo view('sidebar');
-            echo view('db', $data);
+            echo view('questions', $data);
         } else {
             $this->login();
         }
