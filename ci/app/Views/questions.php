@@ -21,17 +21,19 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body container">
-                        <form method="post" action="questions">
+                        <form method="post" action="questions"  enctype="multipart/form-data">
                             <p class="h3 text-center mb-4">Add New Alumni</p>
-                            <label for="">Quiz Code:</label>
-                            <input type="number" class="form-control" name="code">
+                            <label for="">Class:</label>
+                            <input type="text" class="form-control" name="Class" placeholder="16/22">
                             <hr>
-                            <label for="">Quiz Title:</label>
-                            <input type="text" class="form-control" name="title">
+                            <label for="">Picture:</label>
+                            <input type="file" class="form-control" name="Pix" >
                             <hr>
-                            <label for="">Quiz Description:</label>
-                            <textarea class="form-control" name="description"></textarea>
+                            <?php foreach ($flds as $key => $fld):?>
+                            <label for=""><?=$fld?>:</label>
+                            <input type="text" class="form-control" name="<?=$fld?>">
                             <hr>
+                            <?php endforeach; ?>
                             
 
                             <input class="btn btn-primary" type="submit" value="Upload">

@@ -9,6 +9,17 @@ class Home extends BaseController
 {
     public function index()
     {
+        $Alumni = new \App\Models\Alumni();
+
+        $data = [
+            'parentURL' => $_ENV['parentURL'],
+            'alumni' => $Alumni->findAll(),
+        ];
+       echo view('list', $data);
+    }
+
+    public function admin()
+    {
         $session = session();
         if ($session->logged_in == TRUE) {
             $session = session();
@@ -23,45 +34,8 @@ class Home extends BaseController
 
     public function login()
     {
-
-        // var_dump(ROOTPATH);
-        // Configuration::instance($_ENV['CLOUDINARY_URL']);
-        // // Upload the image
-        // $upload = new UploadApi();
-        // echo '<pre>';
-        // echo json_encode(
-        //     $upload->upload('https://res.cloudinary.com/demo/image/upload/flower.jpg', [
-        //         'public_id' => 'flower_sample',
-        //         'use_filename' => TRUE,
-        //         'overwrite' => TRUE]),
-        //     JSON_PRETTY_PRINT
-        // );
-        // echo '</pre>';
         echo view('login');
     }
-
-    public function cards()
-    {
-        $var = new \App\Models\Variables();
-        $scoresheet = new \App\Models\Scoresheet();
-        $user = new \App\Models\Users();
-        $session = session();
-        if ($session->logged_in == TRUE) {
-            $data = [
-                'quizinput' => $var->where('key', 'quizinput')->find()[0]['value'],
-                'quizparticipants' => count($scoresheet->where('sent', '0')->find()),
-                'score' => $scoresheet->join('users', 'users.id = scoresheet.user')->findAll(),
-                'users' => $user->where('clearance', '1')->findAll(),
-            ];
-
-            echo view('header');
-            echo view('sidebar');
-            echo view('cards');
-        } else {
-            $this->login();
-        }
-    }
-
 
     public function postlogin()
     {
@@ -120,9 +94,13 @@ class Home extends BaseController
     public function dashboard()
     {
         $session = session();
+        $Variables = new \App\Models\Variables();
+        $Alumni = new \App\Models\Alumni();
+
         if ($session->logged_in == TRUE) {
             $data = [
-                'alumni' => [],
+                'flds' => explode(',', $Variables->where('key','fields')->find()[0]['value']),
+                'alumni' => $Alumni->findAll(),
             ];
             echo view('header');
             echo view('sidebar');
@@ -138,40 +116,6 @@ class Home extends BaseController
         $this->dashboard($incoming);
     }
 
-    public function questions()
-    {
-        $quiz = new \App\Models\Quiz();
-        $session = session();
-        if ($session->logged_in == TRUE) {
-            $data = [
-                'noq' => range(1, 15),
-                'quiz' => $quiz->findAll(),
-            ];
-            echo view('header');
-            echo view('sidebar');
-            echo view('questions', $data);
-        } else {
-            $this->login();
-        }
-    }
-
-
-    public function ssquestions()
-    {
-        $quiz = new \App\Models\Quiz();
-        $session = session();
-        if ($session->logged_in == TRUE) {
-            $data = [
-                'noq' => range(1, 15),
-                'quiz' => $quiz->findAll(),
-            ];
-            echo view('header');
-            echo view('sidebar');
-            echo view('squestions', $data);
-        } else {
-            $this->login();
-        }
-    }
 
     public function editquestions()
     {
@@ -203,50 +147,19 @@ class Home extends BaseController
     public function postquestions()
     {
         $session = session();
-        $quiz = new \App\Models\Quiz();
+        $Alumni = new \App\Models\Alumni();
         if ($session->logged_in == TRUE) {
             $incoming = $this->request->getPost();
-            $incoming['code'] = array($incoming['code']);
-            $incoming['title'] = array($incoming['title']);
-            $incoming['description'] = array($incoming['description']);
-            $quest = [];
-            $answer = [];
-            $count = 0;
-            foreach ($incoming as $key => $value) {
-                if (count($value) > 3) {
-                    $count++;
-                    $output = [
-                        'id' => $count,
-                        '0' => $value['0'],
-                        '1' => $value['1'],
-                        '2' => $value['2'],
-                        '3' => $value['3'],
-                        '4' => $value['4']
-                    ];
-                    $output2 = [
-                        'id' => $count,
-                        'ans' => $value['5']
-                    ];
-                    array_push($quest, $output);
-                    array_push($answer, $output2);
-                } else {
-                    echo "";
-                }
-                // var_dump($quest);
-                // var_dump($value);
-            }
-            $data = [
-                'code' => $incoming['code'],
-                'title' => $incoming['title'],
-                'description' => $incoming['description'],
-                'published' => 0,
-                'questions' => array(json_encode($quest)),
-                'answers' => array(json_encode($answer)),
-            ];
-            $res = $quiz->insert($data);
+            $id = uniqid($_ENV['owner']);
+            $file = $this->request->getFile('Pix')->store();
+            $upPix = $this->cloud($file, $id);
+            $incoming['id'] = $id;
+            $incoming['Pix'] = $upPix;
+            $res = $Alumni->insert($incoming);
             if ($res) {
-                $this->msg(['msg' => "New Quiz uploaded successfully"]);
+                $this->msg(['msg' => "New Alumnus Added successfully"]);
             }
+
         } else {
             $this->login();
         }
@@ -365,6 +278,20 @@ class Home extends BaseController
         } else {
             $this->login();
         }
+    }
+
+    private function cloud($file, $name)
+    {
+        Configuration::instance($_ENV['CLOUDINARY_URL']);
+        // Upload the image
+        $upload = new UploadApi();
+        $res = $upload->upload(WRITEPATH . 'uploads/'.$file, [
+                'public_id' => $name,
+                'use_filename' => TRUE,
+                'overwrite' => TRUE]);
+
+        return $res['secure_url'];
+        // var_dump($res);
     }
 
     private function reader($file){
