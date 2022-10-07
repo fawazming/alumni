@@ -165,7 +165,7 @@
     <!-- Hero End -->
 
     <!-- Start -->
-    <section class="section">
+    <section class="section pb-0">
         <div class="container">
             <div class="row">
                 <?php foreach ($alumni as $key => $alm): ?>
@@ -178,7 +178,7 @@
                             <a href="page-service-detail.html" class="h5 text-dark title"><?=$alm['Name']?></a>
                             <p class="text-muted mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut consectetur</p>
 
-                            <a href="page-service-detail.html" class="link">Read more <i class="uil uil-arrow-right"></i></a>
+                            <!-- <a href="page-service-detail.html" class="link">Read more <i class="uil uil-arrow-right"></i></a> -->
                         </div>
 
                         <div class="feature-ovelay-one"></div>

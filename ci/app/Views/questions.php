@@ -48,7 +48,7 @@
                     <div class="card-body">
                         <ul class="list-group">
                             <?php foreach ($alumni as $key => $qu) : ?>
-                                <li class="list-group-item"> <a href="editque?id=<?=$qu['id']?>"><?=$qu['title']?></a> </li>
+                                <li class="list-group-item"> <a href="editque?id=<?=$qu['id']?>"><?=$qu['Name']?></a> </li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

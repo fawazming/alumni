@@ -120,21 +120,15 @@ class Home extends BaseController
     public function editquestions()
     {
         $id = $this->request->getGet('id');
-        $quiz = new \App\Models\Quiz();
+        $Variables = new \App\Models\Variables();
+        $Alumni = new \App\Models\Alumni();
         $session = session();
         if ($session->logged_in == TRUE) {
-            $res = $quiz->where('id', $id)->find();
+            $res = $Alumni->where('id', $id)->find();
             $data = [
-                'noq' => range(1, 15),
-                'zero' => 0,
-                'one' => 1,
-                'two' => 2,
-                'three' => 3,
-                'four' => 4,
-                'quiz' => $quiz->findAll(),
+                'flds' => explode(',', $Variables->where('key','fields')->find()[0]['value']),
+                'alumni' => $Alumni->findAll(),
                 'prefill' => $res[0],
-                'quest' => json_decode($res[0]['questions']),
-                'answer' => json_decode($res[0]['answers']),
             ];
             echo view('header');
             echo view('sidebar');
@@ -231,50 +225,37 @@ class Home extends BaseController
     public function updatequestions()
     {
         $session = session();
-        $quiz = new \App\Models\Quiz();
+        $Alumni = new \App\Models\Alumni();
         if ($session->logged_in == TRUE) {
             $incoming = $this->request->getPost();
-            $incoming['code'] = array($incoming['code']);
-            $incoming['id'] = array($incoming['id']);
-            $incoming['title'] = array($incoming['title']);
-            $incoming['description'] = array($incoming['description']);
-            $quest = [];
-            $answer = [];
-            $count = 0;
-            foreach ($incoming as $key => $value) {
-                if (count($value) > 3) {
-                    $count++;
-                    $output = [
-                        'id' => $count,
-                        '0' => $value['0'],
-                        '1' => $value['1'],
-                        '2' => $value['2'],
-                        '3' => $value['3'],
-                        '4' => $value['4']
-                    ];
-                    $output2 = [
-                        'id' => $count,
-                        'ans' => $value['5']
-                    ];
-                    array_push($quest, $output);
-                    array_push($answer, $output2);
-                } else {
-                    echo "";
+            $id = $this->request->getPost('id');
+            if($this->request->getFile('Pix')){
+               $file = $this->request->getFile('Pix')->store();
+                $upPix = $this->cloud($file, $id);
+                $incoming['Pix'] = $upPix;
+                $res = $Alumni->update($id, $incoming);
+                 if ($res) {
+                    $this->msg(['msg' => "Alumnus Updated with new Photo"]);
+                }
+            }else{
+                $res = $Alumni->update($id, $incoming);
+                 if ($res) {
+                    $this->msg(['msg' => "Alumnus Updated with old Photo"]);
                 }
             }
-            $data = [
-                'code' => $incoming['code'],
-                'title' => $incoming['title'],
-                'description' => $incoming['description'],
-                'published' => 0,
-                'questions' => array(json_encode($quest)),
-                'answers' => array(json_encode($answer)),
-            ];
-            $id = $incoming['id'];
-            $res = $quiz->update($id, $data);
-            if ($res) {
-                $this->msg(['msg' => "Quiz updated successfully"]);
-            }
+            // $data = [
+            //     'code' => $incoming['code'],
+            //     'title' => $incoming['title'],
+            //     'description' => $incoming['description'],
+            //     'published' => 0,
+            //     'questions' => array(json_encode($quest)),
+            //     'answers' => array(json_encode($answer)),
+            // ];
+            // $id = $incoming['id'];
+            // $res = $quiz->update($id, $data);
+            // if ($res) {
+            //     $this->msg(['msg' => "Quiz updated successfully"]);
+            // }
         } else {
             $this->login();
         }
@@ -286,11 +267,15 @@ class Home extends BaseController
         // Upload the image
         $upload = new UploadApi();
         $res = $upload->upload(WRITEPATH . 'uploads/'.$file, [
-                'public_id' => $name,
+                'public_id' => 'pfa/'.$name,
                 'use_filename' => TRUE,
                 'overwrite' => TRUE]);
 
-        return $res['secure_url'];
+        // return $res['secure_url'];
+        return 'https://res.cloudinary.com/rayyantech/image/upload/w_256,ar_1:1,c_fill,g_auto,e_art:hokusai/v'.$res['version'].'/'.$res['public_id'].'.'.$res['format'];
+        https://res.cloudinary.com/rayyantech/image/upload/w-256,ar_1:1,c_fill,g_auto,e_art:hokusai/v1665124312/pfa/pfa633fc7d6b1209
+
+        //https://res.cloudinary.com/rayyantech/image/upload/v1665123330/pfa/pfa633fc4012a8f3.jpg
         // var_dump($res);
     }
 
