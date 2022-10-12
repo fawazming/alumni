@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- todo: Create a Class Page -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,60 +75,8 @@
                     <li><a href="<?=$parentURL?>" class="sub-menu-item">Home</a></li>
                     <li><a href="<?=$parentURL?>about" class="sub-menu-item">About Us</a></li>
                     <li><a href="<?=$parentURL?>admission" class="sub-menu-item">Admission</a></li>
-                    <!-- <li class="has-submenu parent-parent-menu-item">
-                        <a href="javascript:void(0)">Portfolio</a><span class="menu-arrow"></span>
-                        <ul class="submenu megamenu">
-                            <li>
-                                <ul>
-                                    <li class="megamenu-head">Classic Portfolio</li>
-                                    <li><a href="portfolio-classic-two.html" class="sub-menu-item">Two Column</a></li>
-                                    <li><a href="portfolio-classic-three.html" class="sub-menu-item">Three Column</a></li>
-                                    <li><a href="portfolio-classic-four.html" class="sub-menu-item">Four Column</a></li>
-                                    <li><a href="portfolio-classic-five.html" class="sub-menu-item">Five Column</a></li>
-                                    <li><a href="portfolio-classic-six.html" class="sub-menu-item">Six Column</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>
-                                    <li class="megamenu-head">Modern Portfolio</li>
-                                    <li><a href="portfolio-modern-two.html" class="sub-menu-item">Two Column</a></li>
-                                    <li><a href="portfolio-modern-three.html" class="sub-menu-item">Three Column</a></li>
-                                    <li><a href="portfolio-modern-four.html" class="sub-menu-item">Four Column</a></li>
-                                    <li><a href="portfolio-modern-five.html" class="sub-menu-item">Five Column</a></li>
-                                    <li><a href="portfolio-modern-six.html" class="sub-menu-item">Six Column</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>
-                                    <li class="megamenu-head">Grid Portfolio</li>
-                                    <li><a href="portfolio-grid-two.html" class="sub-menu-item">Two Column</a></li>
-                                    <li><a href="portfolio-grid-three.html" class="sub-menu-item">Three Column</a></li>
-                                    <li><a href="portfolio-grid-four.html" class="sub-menu-item">Four Column</a></li>
-                                    <li><a href="portfolio-grid-five.html" class="sub-menu-item">Five Column</a></li>
-                                    <li><a href="portfolio-grid-six.html" class="sub-menu-item">Six Column</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>
-                                    <li class="megamenu-head">Masonry Portfolio</li>
-                                    <li><a href="portfolio-classic-masonry.html" class="sub-menu-item">Classic Masonry</a></li>
-                                    <li><a href="portfolio-modern-masonry.html" class="sub-menu-item">Modern Masonry</a></li>
-                                    <li><a href="portfolio-grid-masonry.html" class="sub-menu-item">Grid Masonry</a></li>
-                                    <li><a href="portfolio-project-masonry.html" class="sub-menu-item">Project masonry</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>
-                                    <li class="megamenu-head">Portfolio Detail</li>
-                                    <li><a href="portfolio-detail-one.html" class="sub-menu-item">Portfolio One</a></li>
-                                    <li><a href="portfolio-detail-two.html" class="sub-menu-item">Portfolio Two</a></li>
-                                    <li><a href="portfolio-detail-three.html" class="sub-menu-item">Portfolio Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li> -->
                     <li><a href="<?=$parentURL?>blog" class="sub-menu-item">News & Events</a></li>
-                    <li><a href="https://alumni.sgm.ng" class="sub-menu-item">Alumni</a></li>
+                    <li><a href="<?=base_url()?>" class="sub-menu-item">Alumni</a></li>
                     <li><a href="<?=$parentURL?>contact'" class="sub-menu-item">Contact</a></li>
                 </ul>
                 <!--end navigation menu-->
@@ -169,14 +117,14 @@
         <div class="container">
             <div class="row">
                 <?php foreach ($alumni as $key => $alm): ?>
-                <div class="col-lg-4 col-sm-6 my-3">
+                <div class="col-md-6 col-13 my-3">
                     <div class="card features feature-primary feature-clean feature-transition p-3 border-0 shadow rounded flex-row align-items-center overflow-hidden">
                         <div class="icons text-center rounded me-2">
                            <img src="<?=$alm['Pix']?>" alt="passport" class="img-fluid mb-0">
                         </div>
                         <div class="content mt-4">
                             <a href="page-service-detail.html" class="h5 text-dark title"><?=$alm['Name']?></a>
-                            <p class="text-muted mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut consectetur</p>
+                            <p class="text-muted mt-3">Class: <?=$alm['Class']?> <br> State of Origin: <?=$alm['State_of_Origin']?> <br> Favourite Food: <?=$alm['Favourite_Food']?> <br>Hobbies: <?=$alm['Hobbies']?> <br> Likes: <?=$alm['Likes']?> <br> Dislikes: <?=$alm['Dislikes']?></p>
 
                             <!-- <a href="page-service-detail.html" class="link">Read more <i class="uil uil-arrow-right"></i></a> -->
                         </div>
@@ -191,46 +139,50 @@
         </div><!--end container-->
 
 
+
     <!-- Footer Start -->
     <footer class="bg-primary mb-0" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="footer-py-60 footer-border">
+                    <div class="footer-py-30 footer-border">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-6 mb-0 mb-md-4 pb-0 pb-md-2">
-                                <a href="#" class="logo-footer">
-                                    <img src="<?=base_url('front/img/logo.png')?>" class="img-fluid" alt="" width="45px">
+                            <div class="col-lg-4 col-md-6 col-6 mb-0 pb-0 ">
+                                <a href="<?=base_url('/')?>" class="logo-footer">
+                                    <img src="<?=base_url('img/logo.png')?>" class="img-fluid" alt="" width="45px">
                                 </a>
-                                <p class="mt-4 text-light">Join us at PFA to walk tall</p>
-                                <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
+                                <p class="mt-1 text-light">Join us at PFA to walk tall</p>
+                                <p class="mt-1 text-light"> <a href="tel:+2347040960516" class="text-light">0704 096 0516</a>  <br> <a href="tel:+2349154629290" class="text-light">0915 462 9290</a> <br></p>
+                                <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-1">
 
                                     <li class="list-inline-item"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded text-light"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded text-light"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded text-light"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                                    <li class="list-inline-item"><a href="mailto:support@shreethemes.in" class="rounded text-light"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
+                                    <li class="list-inline-item"><a href="https://www.instagram.com/_prideoffaith_/" target="_blank" class="rounded text-light"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                                    <li class="list-inline-item"><a href="https://twitter.com/prideoffaith" target="_blank" class="rounded text-light"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                                    <li class="list-inline-item"><a href="mailto:prideoffaithacademy@gmail.com" class="rounded text-light"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
                                 </ul>
                                 <!--end icon-->
                             </div>
                             <!--end col-->
                             <div class="col-lg-4 col-md-6 col-6 mt-sm-0  pt-sm-0">
-                                <h5 class="footer-head">Company</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> About us</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Services</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Team</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Pricing</a></li>
-                                </ul>
+                                <h5 class="footer-head">Address</h5>
+
+                                <address><a href="https://goo.gl/maps/BjmTPtUVyvHnXA5B9" target="_blank" class="text-white">
+                                    54, Ode-Lemo Road, <br>
+                                    Sabo Sagamu, <br>
+                                    Ogun State.
+                                </a></address>
+
+                                <p class="mt-1 text-light"> <a href="tel:+2348028207043" class="text-light">0802 820 7043</a>  <br> <a href="tel:+2348182479571" class="text-light">0818 247 9571</a> <br></p>
                             </div>
                             <!--end col-->
                             <div class="d-none d-lg-block col-lg-4 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="footer-head">Usefull Links</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Terms of Services</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Privacy Policy</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Documentation</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Changelog</a></li>
-                                    <li><a href="javascript:void(0)" class="text-foot"><i class="uil uil-angle-right-b me-1"></i> Components</a></li>
+                                <h5 class="footer-head">Links</h5>
+                                <ul class="list-unstyled footer-list mt-2">
+                                    <li class=""><a href="<?=base_url('about')?>" class="text-foot text-light"><i class="uil uil-angle-right-b me-1"></i> About Us</a></li>
+                                    <li><a href="<?=base_url('admission')?>" class="text-foot text-light"><i class="uil uil-angle-right-b me-1"></i> Admission</a></li>
+                                    <li><a href="<?=base_url('blog')?>" class="text-foot text-light"><i class="uil uil-angle-right-b me-1"></i> News & Events</a></li>
+                                    <!-- <li><a href="<?=base_url('contact')?>" class="text-foot text-light"><i class="uil uil-angle-right-b me-1"></i>Contact Us</a></li> -->
+                                    <li><a href="<?=base_url('admission#fees')?>" class="text-foot text-light"><i class="uil uil-angle-right-b me-1"></i> Tuition & Fees</a></li>
                                 </ul>
                             </div>
                             <!--end col-->
@@ -241,7 +193,7 @@
                 <!--end col-->
             </div>
             <div class="text-center">
-                <p class="pb-3 m-0 text-light">
+                <p class="pb-3 text-light m-0">
                     Designed with ❤️ by <a href="https://rayyantech.sgm.ng/" target="_blank" class="text-reset">RayyanTech</a>.
                 </p>
             </div>

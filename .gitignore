@@ -61,7 +61,7 @@ writable/uploads/*
 !writable/uploads/index.html
 
 writable/debugbar/*
-
+adminer/alumni
 php_errors.log
 
 #-------------------------
