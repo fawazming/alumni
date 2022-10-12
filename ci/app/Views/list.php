@@ -124,7 +124,7 @@
                         </div>
                         <div class="content mt-4">
                             <a href="page-service-detail.html" class="h5 text-dark title"><?=$alm['Name']?></a>
-                            <p class="text-muted mt-3">Class: <?=$alm['Class']?> <br> State of Origin: <?=$alm['State_of_Origin']?> <br> Favourite Food: <?=$alm['Favourite_Food']?> <br>Hobbies: <?=$alm['Hobbies']?> <br> Likes: <?=$alm['Likes']?> <br> Dislikes: <?=$alm['Dislikes']?></p>
+                            <p class="text-muted mt-3">Class: <?=$alm['Class']?> <br> State of Origin: <?=$alm['State_of_Origin']?> <br> Favourite Food: <?=$alm['Favourite_Food']?> <br>Hobbies: <?=$alm['Hobbies']?> <br> Likes: <?=$alm['Likes']?> <br> Dislikes: <?=$alm['Dislikes']?> <br>Mentor: <?=$alm['Mentor']?></p>
 
                             <!-- <a href="page-service-detail.html" class="link">Read more <i class="uil uil-arrow-right"></i></a> -->
                         </div>
