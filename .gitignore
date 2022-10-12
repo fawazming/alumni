@@ -1,6 +1,7 @@
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
+adminer/alumni
 
 # OS X
 .DS_Store
@@ -61,7 +62,6 @@ writable/uploads/*
 !writable/uploads/index.html
 
 writable/debugbar/*
-adminer/alumni
 php_errors.log
 
 #-------------------------
